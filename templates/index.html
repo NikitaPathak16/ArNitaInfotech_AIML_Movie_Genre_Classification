@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Movie Genre Classification</title>
+
+    <style>
+        body {
+            font-family: "Segoe UI", Tahoma, sans-serif;
+            background: linear-gradient(120deg, #667eea, #764ba2);
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .stat-box {
+            background: #f4f6fb;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 130px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            font-size: 15px;
+            resize: none;
+        }
+
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background: #5a6fd6;
+        }
+
+        .prediction {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #764ba2;
+            text-align: center;
+        }
+
+        footer {
+            text-align: center;
+            color: #ddd;
+            margin-top: 20px;
+            font-size: 13px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1> Movie Genre Classification</h1>
+
+    <div class="card">
+        <h2> Dataset Overview</h2>
+        <p><b>Total Movies:</b> {{ total }}</p>
+
+        <div class="stats">
+            {% for genre, count in genre_counts.items() %}
+            <div class="stat-box">
+                <b>{{ genre }}</b><br>
+                {{ count }} movies
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="card">
+        <h2> Predict Movie Genre</h2>
+
+        <form method="POST">
+            <textarea name="plot" placeholder="Enter movie plot summary..." required></textarea>
+            <br>
+            <button type="submit">Predict Genre</button>
+        </form>
+
+        {% if prediction %}
+        <div class="prediction">
+            Predicted Genre: {{ prediction }}
+        </div>
+        {% endif %}
+    </div>
+
+    <footer>
+        AI/ML Internship Task • Movie Genre Classification
+    </footer>
+
+</div>
+
+</body>
+</html>
